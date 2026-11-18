@@ -29,19 +29,51 @@ def extended_euclidean_algorithm(a, b):
     return gcd, x, y
 
 
-extended_euclidean_algorithm(INPUT_NUMBER, 117035)
+if __name__ == "__main__":
 
-print(f"The gcd of {INPUT_NUMBER} and {117035} is: {euclidean_algorithm(INPUT_NUMBER, 117035)}")
+    extended_euclidean_algorithm(INPUT_NUMBER, 117035)
 
-
-r, q1, q2 = extended_euclidean_algorithm(INPUT_NUMBER, 117035)
-print(f"The gcd of {INPUT_NUMBER} and {117035} is: {r} where q1:{q1} q2:{q2}")
+    print(f"The gcd of {INPUT_NUMBER} and {117035} is: {euclidean_algorithm(INPUT_NUMBER, 117035)}")
 
 
-# check
+    r, q1, q2 = extended_euclidean_algorithm(INPUT_NUMBER, 117035)
+    print(f"The gcd of {INPUT_NUMBER} and {117035} is: {r} where q1:{q1} q2:{q2}")
 
-if euclidean_algorithm(INPUT_NUMBER, 117035) != math.gcd(INPUT_NUMBER, 117035):
-    print("Euclidean Algorithm Failed")
 
-if r != math.gcd(INPUT_NUMBER, 117035) or q1*INPUT_NUMBER + q2*117035 != r :
-     print("Extended Euclidean Algorithm Failed")
+    # check
+
+    if euclidean_algorithm(INPUT_NUMBER, 117035) != math.gcd(INPUT_NUMBER, 117035):
+        print("Euclidean Algorithm Failed")
+
+    if r != math.gcd(INPUT_NUMBER, 117035) or q1*INPUT_NUMBER + q2*117035 != r :
+        print("Extended Euclidean Algorithm Failed")
+
+    c = (292 % 270) + 1
+
+    r, x, y = extended_euclidean_algorithm(c, 271)
+    print("The multiplicative inverse of c is : ", x % 271)
+    if x % 271 != pow(c, -1, 271):
+        print("failed to calc multiplicative inverse")
+
+
+    def compute_repeated_exponential_mod(base, exponent, mod):
+        result = 1
+
+        for _ in range(exponent):
+            result = (result * base) % mod
+
+        return result
+
+    u = 92 + 2
+
+    print("U^250 mod 569 =",compute_repeated_exponential_mod(u, 350, 569))
+    print("Using pow: ", pow(u, 350, 569))
+    print("u^350 = ", pow(u, 350))
+    print("Number of digits in u^350 :", len(str( pow(u, 350))))
+
+
+    full = pow(u, 350)
+    reduced = pow(u, 350, 569)
+
+    print("Digits in u^350:", len(str(full)))
+    print("Digits in u^350 mod 569:", len(str(reduced)))
